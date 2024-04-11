@@ -12,7 +12,13 @@ const Page = async () => {
 
     
 
-    const {data, isLoading} = trpc.test.useQuery()
+    const {data, isLoading} = trpc.authCallback.useQuery(undefined, {
+        onSuccess: ({success}) => {
+            if(success){
+                router.push(origin ? `/${origin}` : '/dashboard')
+            }
+        }
+    })
 
 }
 
